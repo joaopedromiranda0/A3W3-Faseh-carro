@@ -1,0 +1,16 @@
+body {
+    background-color: #72405d;  
+}
+
+.container {
+    margin-top: 20px;  
+}
+
+.btn-custom {
+    background-color: #10ee5a;  
+    color: rgb(129, 43, 43);
+}
+
+.btn-custom:hover {
+    background-color: #0056b3;  
+}

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}  <!-- Carregando a tag static -->
+    <link href="{% static 'carros/css/styles.css' %}" rel="stylesheet">  <!-- Incluindo CSS -->
+    <title>Lista de Carros</title>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mb-4">Lista de Carros</h1>
+
+        <!-- Formulário de Busca -->
+        <form method="GET" class="mb-3">
+            <input type="text" name="q" placeholder="Buscar carro..." class="form-control" value="{{ request.GET.q }}">
+            <button type="submit" class="btn btn-primary mt-2">Buscar</button>
+        </form>
+
+        <a href="{% url 'criar_carro' %}" class="btn btn-custom mb-3">Adicionar Carro</a>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Modelo</th>
+                    <th>Marca</th>
+                    <th>Ano</th>
+                    <th>Preço Diário</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for carro in carros %}
+                <tr>
+                    <td>{{ carro.modelo }}</td>
+                    <td>{{ carro.marca }}</td>
+                    <td>{{ carro.ano }}</td>
+                    <td>R$ {{ carro.preco_diaria }}</td>
+                    <td>
+                        <a href="{% url 'editar_carro' carro.pk %}" class="btn btn-warning">Editar</a>
+                        <a href="{% url 'deletar_carro' carro.pk %}" class="btn btn-danger">Deletar</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5">Nenhum carro encontrado.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- JS do Bootstrap e seu script personalizado -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'carros/js/scripts.js' %}"></script>  <!-- Incluindo JS -->
+</body>
+</html>
